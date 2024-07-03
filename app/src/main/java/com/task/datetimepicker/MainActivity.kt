@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding?.btnPickTime?.setOnClickListener {
             val calendar = Calendar.getInstance()
+            val timeFormat = SimpleDateFormat("HH:mm:ss a", Locale.getDefault())
             val hour=calendar.get(Calendar.HOUR_OF_DAY)
             val minute=calendar.get(Calendar.MINUTE)
             val startingHour=9    //9am
@@ -53,8 +54,8 @@ class MainActivity : AppCompatActivity() {
                 }else  if (hourOfDay>finishingHour||(hourOfDay==finishingHour && minute>=0)){
                     Toast.makeText(this,"Select Valid Time",Toast.LENGTH_SHORT).show()
                 }else{
-                    val timeFormat = SimpleDateFormat("HH:mm:ss a", Locale.getDefault())
-                    calendar.set(hourOfDay,minute)
+                    calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                    calendar.set(Calendar.MINUTE,minute)
                     binding?.tvTimePicker?.setText(timeFormat.format(calendar.time))
                 }
             }
